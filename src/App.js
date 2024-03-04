@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { useGetAllPostQuery, useGetPostByIdQuery } from "./services/post";
 function App() {
+  // const responseInfo = useGetAllPostQuery();
+  const responseInfo = useGetPostByIdQuery(5);
+  // console.log("Response Information:", responseInfo);
+  // console.log("Data", responseInfo.data);
+
+  if (responseInfo.isLoading) return <div>Loading....</div>;
+  // if (responseInfo.isError) return <div>An error Occured</div>;
   return (
+    // <div className="App">
+    //   <h1> Redux Toolkit- RTK Query (Get All Data)</h1>
+    //   {responseInfo.data.map((post, i) => (
+    //     <div key={i}>
+    //       <h2>
+    //         {post.id} {post.title}
+    //       </h2>
+    //       <p>{post.body}</p>
+    //       <hr />
+    //     </div>
+    //   ))}
+    // </div>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Get Single Data by Id </h1>
+      <h2>
+        {responseInfo.data.title}
+        {responseInfo.data.body}
+      </h2>
     </div>
   );
 }
